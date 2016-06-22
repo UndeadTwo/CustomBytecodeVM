@@ -3,7 +3,6 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <memory.h>
 #include <stdbool.h>
 
 typedef struct {
@@ -34,11 +33,15 @@ state createState() {
 
   newState.programCounter = 0;
 
-  newState.vmMemory = (char*)malloc(sizeof(char) * 1024 * 32);
+  newState.vmMemory = (char*)calloc(1024 * 32, sizeof(char));
 
   newState.hasExited = false;
 
   return newState;
+}
+
+void freeState(state stateToFree) {
+  free(stateToFree.vmMemory);
 }
 
 void printState(state mState) {

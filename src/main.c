@@ -5,7 +5,10 @@
 int main() {
   state MyState = createState();
 
-  printState(MyState);
+  while(MyState.hasExited != true) {
+    state NewState = parseCommand(MyState);
+    
+  }
 
   return 0;
 }
