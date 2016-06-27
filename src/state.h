@@ -1,21 +1,25 @@
 #ifndef _src_state_h
 #define _src_state_h
 
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
 
+typedef unsigned char vmbyte;
+typedef unsigned short int vmword;
+
 typedef struct {
-  char registera,
+  vmbyte registera,
     registerb,
     registerc,
     registerd,
     registerAccumulator,
     registerCarry;
 
-  int programCounter;
+  vmword programCounter;
 
-  char* vmMemory;
+  vmbyte* vmMemory;
 
   bool hasExited;
 } state;
@@ -33,7 +37,7 @@ state createState() {
 
   newState.programCounter = 0;
 
-  newState.vmMemory = (char*)calloc(1024 * 32, sizeof(char));
+  newState.vmMemory = (vmbyte*)calloc(1024 * 32, sizeof(vmbyte));
 
   newState.hasExited = false;
 
