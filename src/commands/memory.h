@@ -16,6 +16,7 @@ state mov(state currentState, vmbyte arga, vmbyte argb) {
 
 state read(state currentState, vmword arga, vmbyte argb) {
   printf("READ: %d %d\n", arga, argb);
+  printf("READ ext: memory %d\n", currentState.vmMemory[arga]);
   return setRegisterValue(currentState, argb, currentState.vmMemory[arga]);
 }
 
