@@ -1,17 +1,28 @@
 #ifndef _src_commands_arithmetic_h_
 #define _src_commands_arithmetic_h_
 
-#include "./command.h"
+#include "command.h"
+#include "utilities.h"
 
 state add(state currentState, vmbyte arga, vmbyte argb) {
-  vmbyte result = argb + arga;
+  printf("ADD: %d %d\n", arga, argb);
+  vmbyte valuea = getRegisterValue(currentState, arga);
+  vmbyte valueb = getRegisterValue(currentState, argb);
+
+
+  vmbyte result = valueb + valuea;
   state newState = currentState;
   newState.registerAccumulator = result;
   return newState;
 }
 
 state sub(state currentState, vmbyte arga, vmbyte argb) {
-  vmbyte result = argb - arga;
+  printf("SUB: %d %d\n", arga, argb);
+  vmbyte valuea = getRegisterValue(currentState, arga);
+  vmbyte valueb = getRegisterValue(currentState, argb);
+
+
+  vmbyte result = valueb - valuea;
   state newState = currentState;
   newState.registerAccumulator = result;
   return newState;

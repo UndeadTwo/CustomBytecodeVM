@@ -7,7 +7,8 @@ typedef enum {
   REGC = 0x02,
   REGD = 0x03,
   REGCARRY = 0x04,
-  REGACCUM = 0x05,
+  REGPC = 0x05,
+  REGACCUM = 0x06,
 } registers;
 
 #endif

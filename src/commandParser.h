@@ -26,11 +26,11 @@ state parseCommand(state input) {
       output.programCounter += 3;
       break;
     case READ:
-      output = read(input, input.vmMemory[input.programCounter + 1], input.vmMemory[input.programCounter + 3]);
+      output = read(input, *(vmword*)(input.vmMemory + input.programCounter + 1), input.vmMemory[input.programCounter + 3]);
       output.programCounter += 4;
       break;
     case WRITE:
-      output = write(input, input.vmMemory[input.programCounter + 1], input.vmMemory[input.programCounter + 2]);
+      output = write(input, input.vmMemory[input.programCounter + 1], *(vmword*)(input.vmMemory + input.programCounter + 2));
       output.programCounter += 4;
       break;
     case ADD:
@@ -70,24 +70,19 @@ state parseCommand(state input) {
       output.programCounter += 3;
       break;
     case JMP:
-      output = jump(input, input.vmMemory[input.programCounter + 1]);
-      output.programCounter += 3;
+      output = jump(input, *(vmword*)(input.vmMemory + input.programCounter + 1));
       break;
     case JEZ:
-      output = jumpequalzero(input, input.vmMemory[input.programCounter + 1], input.vmMemory[input.programCounter + 2]);
-      output.programCounter += 3;
+      output = jumpequalzero(input, input.vmMemory[input.programCounter + 1], *(vmword*)(input.vmMemory + input.programCounter + 2));
       break;
     case JNZ:
-      output = jumpnotzero(input, input.vmMemory[input.programCounter + 1], input.vmMemory[input.programCounter + 2]);
-      output.programCounter += 3;
+      output = jumpnotzero(input, input.vmMemory[input.programCounter + 1], *(vmword*)(input.vmMemory + input.programCounter + 2));
       break;
     case JLZ:
-      output = jumplesserzero(input, input.vmMemory[input.programCounter + 1], input.vmMemory[input.programCounter + 2]);
-      output.programCounter += 3;
+      output = jumplesserzero(input, input.vmMemory[input.programCounter + 1], *(vmword*)(input.vmMemory + input.programCounter + 2));
       break;
     case JGZ:
-      output = jumpgreaterzero(input, input.vmMemory[input.programCounter + 1], input.vmMemory[input.programCounter + 2]);
-      output.programCounter += 3;
+      output = jumpgreaterzero(input, input.vmMemory[input.programCounter + 1], *(vmword*)(input.vmMemory + input.programCounter + 2));
       break;
     case END:
       output = end(input);
