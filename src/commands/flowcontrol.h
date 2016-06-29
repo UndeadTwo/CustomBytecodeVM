@@ -2,6 +2,7 @@
 #define _src_commands_flowcontrol_h_
 
 #include "command.h"
+#include "utilities.h"
 
 state jump(state currentState, vmword arga) {
   printf("JMP: %d\n", arga);
@@ -15,7 +16,7 @@ state jumpequalzero(state currentState, vmbyte arga, vmword argb) {
   state newState = currentState;
   vmword result = 0;
 
-  if(arga == 0)
+  if(getRegisterValue(currentState, arga) == 0)
     result = argb;
   else
     result = newState.programCounter + 4;
@@ -29,7 +30,7 @@ state jumpnotzero(state currentState, vmbyte arga, vmword argb) {
   state newState = currentState;
   vmword result = 0;
 
-  if(arga != 0)
+  if(getRegisterValue(currentState, arga) != 0)
     result = argb;
   else
     result = newState.programCounter + 4;
@@ -43,7 +44,7 @@ state jumpgreaterzero(state currentState, vmbyte arga, vmword argb) {
   state newState = currentState;
   vmword result = 0;
 
-  if(arga > 0)
+  if(getRegisterValue(currentState, arga) > 0)
     result = argb;
   else
     result = newState.programCounter + 4;
@@ -57,7 +58,7 @@ state jumplesserzero(state currentState, vmbyte arga, vmword argb) {
   state newState = currentState;
   vmword result = 0;
 
-  if(arga < 0)
+  if(getRegisterValue(currentState, arga) < 0)
     result = argb;
   else
     result = newState.programCounter + 4;
