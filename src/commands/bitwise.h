@@ -4,7 +4,7 @@
 #include "command.h"
 #include "utilities.h"
 
-state bitwiseand(state currentState, vmbyte arga, vmbyte argb) {
+state bitwise_and(state currentState, vmbyte arga, vmbyte argb) {
   printf("AND: %d %d\n", arga, argb);
   vmbyte valuea = getRegisterValue(currentState, arga);
   vmbyte valueb = getRegisterValue(currentState, argb);
@@ -15,7 +15,7 @@ state bitwiseand(state currentState, vmbyte arga, vmbyte argb) {
   return newState;
 }
 
-state bitwisenand(state currentState, vmbyte arga, vmbyte argb) {
+state bitwise_nand(state currentState, vmbyte arga, vmbyte argb) {
   printf("NAND: %d %d\n", arga, argb);
   vmbyte valuea = getRegisterValue(currentState, arga);
   vmbyte valueb = getRegisterValue(currentState, argb);
@@ -26,7 +26,7 @@ state bitwisenand(state currentState, vmbyte arga, vmbyte argb) {
   return newState;
 }
 
-state bitwiseor(state currentState, vmbyte arga, vmbyte argb) {
+state bitwise_or(state currentState, vmbyte arga, vmbyte argb) {
   printf("OR: %d %d\n", arga, argb);
   vmbyte valuea = getRegisterValue(currentState, arga);
   vmbyte valueb = getRegisterValue(currentState, argb);
@@ -37,7 +37,7 @@ state bitwiseor(state currentState, vmbyte arga, vmbyte argb) {
   return newState;
 }
 
-state bitwisenor(state currentState, vmbyte arga, vmbyte argb) {
+state bitwise_nor(state currentState, vmbyte arga, vmbyte argb) {
   printf("NOR: %d %d\n", arga, argb);
   vmbyte valuea = getRegisterValue(currentState, arga);
   vmbyte valueb = getRegisterValue(currentState, argb);
@@ -48,7 +48,7 @@ state bitwisenor(state currentState, vmbyte arga, vmbyte argb) {
   return newState;
 }
 
-state bitwisexor(state currentState, vmbyte arga, vmbyte argb) {
+state bitwise_xor(state currentState, vmbyte arga, vmbyte argb) {
   printf("XOR: %d %d\n", arga, argb);
   vmbyte valuea = getRegisterValue(currentState, arga);
   vmbyte valueb = getRegisterValue(currentState, argb);
@@ -59,7 +59,7 @@ state bitwisexor(state currentState, vmbyte arga, vmbyte argb) {
   return newState;
 }
 
-state bitwiseleftshift(state currentState, vmbyte arga, vmbyte argb) {
+state bitwise_leftshift(state currentState, vmbyte arga, vmbyte argb) {
   printf("ROTL: %d %d\n", arga, argb);
   vmbyte valuea = getRegisterValue(currentState, arga);
   vmbyte valueb = getRegisterValue(currentState, argb);
@@ -70,7 +70,7 @@ state bitwiseleftshift(state currentState, vmbyte arga, vmbyte argb) {
   return newState;
 }
 
-state bitwiserightshift(state currentState, vmbyte arga, vmbyte argb) {
+state bitwise_rightshift(state currentState, vmbyte arga, vmbyte argb) {
   printf("ROTR: %d %d\n", arga, argb);
   vmbyte valuea = getRegisterValue(currentState, arga);
   vmbyte valueb = getRegisterValue(currentState, argb);

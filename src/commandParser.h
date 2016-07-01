@@ -17,75 +17,77 @@ state parseCommand(state input) {
   state output = input;
   unsigned char commandByte = input.vmMemory[input.programCounter];
 
+  //printState(input);
+
   switch(commandByte) {
     case NOOP:
       output.programCounter++;
       break;
     case MOV:
-      output = mov(input, input.vmMemory[input.programCounter + 1], input.vmMemory[input.programCounter + 2]);
+      output = mem_mov(input, input.vmMemory[input.programCounter + 1], input.vmMemory[input.programCounter + 2]);
       output.programCounter += 3;
       break;
     case READ:
-      output = read(input, *(vmword*)(input.vmMemory + input.programCounter + 1), input.vmMemory[input.programCounter + 3]);
+      output = mem_read(input, *(vmword*)(input.vmMemory + input.programCounter + 1), input.vmMemory[input.programCounter + 3]);
       output.programCounter += 4;
       break;
     case WRITE:
-      output = write(input, input.vmMemory[input.programCounter + 1], *(vmword*)(input.vmMemory + input.programCounter + 2));
+      output = mem_write(input, input.vmMemory[input.programCounter + 1], *(vmword*)(input.vmMemory + input.programCounter + 2));
       output.programCounter += 4;
       break;
     case ADD:
-      output = add(input, input.vmMemory[input.programCounter + 1], input.vmMemory[input.programCounter + 2]);
+      output = ari_add(input, input.vmMemory[input.programCounter + 1], input.vmMemory[input.programCounter + 2]);
       output.programCounter += 3;
       break;
     case SUB:
-      output = sub(input, input.vmMemory[input.programCounter + 1], input.vmMemory[input.programCounter + 2]);
+      output = ari_sub(input, input.vmMemory[input.programCounter + 1], input.vmMemory[input.programCounter + 2]);
       output.programCounter += 3;
       break;
     case AND:
-      output = bitwiseand(input, input.vmMemory[input.programCounter + 1], input.vmMemory[input.programCounter + 2]);
+      output = bitwise_and(input, input.vmMemory[input.programCounter + 1], input.vmMemory[input.programCounter + 2]);
       output.programCounter += 3;
       break;
     case NAND:
-      output = bitwisenand(input, input.vmMemory[input.programCounter + 1], input.vmMemory[input.programCounter + 2]);
+      output = bitwise_nand(input, input.vmMemory[input.programCounter + 1], input.vmMemory[input.programCounter + 2]);
       output.programCounter += 3;
       break;
     case OR:
-      output = bitwiseor(input, input.vmMemory[input.programCounter + 1], input.vmMemory[input.programCounter + 2]);
+      output = bitwise_or(input, input.vmMemory[input.programCounter + 1], input.vmMemory[input.programCounter + 2]);
       output.programCounter += 3;
       break;
     case NOR:
-      output = bitwisenor(input, input.vmMemory[input.programCounter + 1], input.vmMemory[input.programCounter + 2]);
+      output = bitwise_nor(input, input.vmMemory[input.programCounter + 1], input.vmMemory[input.programCounter + 2]);
       output.programCounter += 3;
       break;
     case XOR:
-      output = bitwisexor(input, input.vmMemory[input.programCounter + 1], input.vmMemory[input.programCounter + 2]);
+      output = bitwise_xor(input, input.vmMemory[input.programCounter + 1], input.vmMemory[input.programCounter + 2]);
       output.programCounter += 3;
       break;
     case ROTL:
-      output = bitwiseleftshift(input, input.vmMemory[input.programCounter + 1], input.vmMemory[input.programCounter + 2]);
+      output = bitwise_leftshift(input, input.vmMemory[input.programCounter + 1], input.vmMemory[input.programCounter + 2]);
       output.programCounter += 3;
       break;
     case ROTR:
-      output = bitwiserightshift(input, input.vmMemory[input.programCounter + 1], input.vmMemory[input.programCounter + 2]);
+      output = bitwise_rightshift(input, input.vmMemory[input.programCounter + 1], input.vmMemory[input.programCounter + 2]);
       output.programCounter += 3;
       break;
     case JMP:
-      output = jump(input, *(vmword*)(input.vmMemory + input.programCounter + 1));
+      output = flo_jump(input, *(vmword*)(input.vmMemory + input.programCounter + 1));
       break;
     case JEZ:
-      output = jumpequalzero(input, input.vmMemory[input.programCounter + 1], *(vmword*)(input.vmMemory + input.programCounter + 2));
+      output = flo_jumpequalzero(input, input.vmMemory[input.programCounter + 1], *(vmword*)(input.vmMemory + input.programCounter + 2));
       break;
     case JNZ:
-      output = jumpnotzero(input, input.vmMemory[input.programCounter + 1], *(vmword*)(input.vmMemory + input.programCounter + 2));
+      output = flo_jumpnotzero(input, input.vmMemory[input.programCounter + 1], *(vmword*)(input.vmMemory + input.programCounter + 2));
       break;
     case JLZ:
-      output = jumplesserzero(input, input.vmMemory[input.programCounter + 1], *(vmword*)(input.vmMemory + input.programCounter + 2));
+      output = flo_jumplesserzero(input, input.vmMemory[input.programCounter + 1], *(vmword*)(input.vmMemory + input.programCounter + 2));
       break;
     case JGZ:
-      output = jumpgreaterzero(input, input.vmMemory[input.programCounter + 1], *(vmword*)(input.vmMemory + input.programCounter + 2));
+      output = flo_jumpgreaterzero(input, input.vmMemory[input.programCounter + 1], *(vmword*)(input.vmMemory + input.programCounter + 2));
       break;
     case END:
-      output = end(input);
+      output = flo_end(input);
       output.programCounter += 1;
       break;
     default:

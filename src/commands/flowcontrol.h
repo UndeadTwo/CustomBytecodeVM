@@ -4,14 +4,14 @@
 #include "command.h"
 #include "utilities.h"
 
-state jump(state currentState, vmword arga) {
+state flo_jump(state currentState, vmword arga) {
   printf("JMP: %d\n", arga);
   state newState = currentState;
   newState.programCounter = arga;
   return newState;
 }
 
-state jumpequalzero(state currentState, vmbyte arga, vmword argb) {
+state flo_jumpequalzero(state currentState, vmbyte arga, vmword argb) {
   printf("JEZ: %d %d\n", arga, argb);
   state newState = currentState;
   vmword result = 0;
@@ -25,7 +25,7 @@ state jumpequalzero(state currentState, vmbyte arga, vmword argb) {
   return newState;
 }
 
-state jumpnotzero(state currentState, vmbyte arga, vmword argb) {
+state flo_jumpnotzero(state currentState, vmbyte arga, vmword argb) {
   printf("JNZ: %d %d\n", arga, argb);
   state newState = currentState;
   vmword result = 0;
@@ -39,7 +39,7 @@ state jumpnotzero(state currentState, vmbyte arga, vmword argb) {
   return newState;
 }
 
-state jumpgreaterzero(state currentState, vmbyte arga, vmword argb) {
+state flo_jumpgreaterzero(state currentState, vmbyte arga, vmword argb) {
   printf("JGZ: %d %d\n", arga, argb);
   state newState = currentState;
   vmword result = 0;
@@ -53,7 +53,7 @@ state jumpgreaterzero(state currentState, vmbyte arga, vmword argb) {
   return newState;
 }
 
-state jumplesserzero(state currentState, vmbyte arga, vmword argb) {
+state flo_jumplesserzero(state currentState, vmbyte arga, vmword argb) {
   printf("JLZ: %d %d\n", arga, argb);
   state newState = currentState;
   vmword result = 0;
@@ -67,7 +67,7 @@ state jumplesserzero(state currentState, vmbyte arga, vmword argb) {
   return newState;
 }
 
-state end(state currentState) {
+state flo_end(state currentState) {
   printf("END\n");
   state newState = currentState;
 
